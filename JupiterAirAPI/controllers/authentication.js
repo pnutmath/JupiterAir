@@ -1,5 +1,6 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
+require('../models/User.js');
 const User = mongoose.model('User');
 
 module.exports.register = function (req, res) {
@@ -7,9 +8,7 @@ module.exports.register = function (req, res) {
     //TODO: validation is required
     user.name = req.body.name;
     user.username = req.body.username;
-
-    user.setPassword(req.body.password);
-
+    user.setPassword(req.body.password);  
     user.save(function (err) {
         var token;
         token = user.generateJwt();

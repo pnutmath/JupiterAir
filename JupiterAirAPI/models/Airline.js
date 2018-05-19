@@ -7,13 +7,13 @@ let airlineSchema = mongoose.Schema({
     slogan: String,
     rating: [{
         username: { type: Schema.ObjectId, ref: 'User', required: true },
-        rate: NUmber
+        rate: Number
     }],
     comments: [{
         username: { type: Schema.ObjectId, ref: 'User', required: true },
         comment: String
     }],
-    founded_on: number(4),
+    founded_on: Number,
     hubs: String,
     focus_cities: [String],
     destinations: Number,

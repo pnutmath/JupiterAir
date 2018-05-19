@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const config = require('config')
 var jwt = require('express-jwt');
+
 var auth = jwt({
   secret: config.get('secret_key'),
   userProperty: 'payload'
@@ -12,21 +13,23 @@ router.use(function timeLog(req, res, next) {
   next()
 });
 
+
 //controller modules
 let ctrlAuth = require('../controllers/authentication');
-let airline_controller = require('../controllers/airlineController');
+let airline_controller = require('../controllers/airline');
 
 // define the home page route
-router.get('/', function (req, res) {
-  res.send('Birds home page')
+router.get('/admin', auth, function (req, res) {
+  res.send('Airlines home page')
 })
 // define the about route
-router.get('/about', function (req, res) {
-  res.send('About birds')
+router.post('/about', function (req, res) {
+  console.log(req.body);
+  res.send('About airlines')
 })
 
 // authentication
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
 
-module.exports = router
+module.exports = router;
