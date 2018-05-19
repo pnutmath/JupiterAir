@@ -1,0 +1,28 @@
+{
+  "name": "jupiterair",
+  "version": "1.0.0",
+  "description": "Project for SEG Intermediate level task",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "airline"
+  ],
+  "author": "Abhay",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhaygawade/JupiterAir.git"
+  },
+  "dependencies": {
+    "config": "^1.30.0",
+    "express": "^4.16.3",
+    "express-jwt": "^5.3.1",
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "^5.1.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  }
+}
