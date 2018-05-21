@@ -22,8 +22,8 @@ let airline_controller = require('../controllers/airline');
 router.get('/admin', auth, function (req, res) {
   res.send('Airlines home page')
 })
-// define the about route
-router.post('/about', function (req, res) {
+// define the airline route
+router.get('/airline', function (req, res) {
   console.log(req.body);
   res.send('About airlines')
 })

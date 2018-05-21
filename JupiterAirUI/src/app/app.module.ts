@@ -10,12 +10,14 @@ import { RegisterComponent } from './register/register.component';
 import { AuthenticationService } from './services/authentication.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,

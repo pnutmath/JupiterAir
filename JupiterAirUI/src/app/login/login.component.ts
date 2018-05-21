@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../services/authentication.service';
-import { User } from '../models/User';
+import { AuthenticationService, TokenPayload } from '../services/authentication.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -9,17 +8,24 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  isValidUser = true;
+  credentials: TokenPayload = {
+    username: '',
+    password: ''
+  };
   constructor(private _auth: AuthenticationService) { }
 
   ngOnInit() {
+    this._auth.routeUser();
   }
 
-  doLogin(loginform: NgForm): void {
-    const user: User = loginform.value;
-    this._auth.verifyUser(user).subscribe((res) => {
-      console.log(res);
-      // TODO: let me check what to do
+  doLogin() {
+    this._auth.verifyUser(this.credentials).subscribe((res) => {
+      this.isValidUser = true;
+      this._auth.routeUser();
+    }, err => {
+      this.isValidUser = false;
+      console.error(err);
     });
 
   }

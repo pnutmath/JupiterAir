@@ -1,5 +1,5 @@
 <div class="text-center">
-  <form #loginform="ngForm" (ngSubmit)="doLogin(loginform);" class="form-signin">
+  <form #loginform="ngForm" (submit)="doLogin();" class="form-signin">
     <div *ngIf="!isValidUser && loginform.submitted" class="alert alert-danger" role="alert">
       Username / password is invalid!
     </div>
@@ -7,16 +7,19 @@
 
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="username" class="sr-only">Username</label>
-    <input type="text" id="username" name="username" [(ngModel)]="username" class="form-control" placeholder="Username" required
-      autofocus>
+    <input type="text" id="username" name="username" [(ngModel)]="credentials.username" class="form-control" placeholder="Username"
+      required autofocus>
     <label for="password" class="sr-only">Password</label>
-    <input type="password" id="password" name="password" [(ngModel)]="password" class="form-control" placeholder="Password" required>
+    <input type="password" id="password" name="password" [(ngModel)]="credentials.password" class="form-control" placeholder="Password"
+      required>
     <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="loginform.invalid">Sign in</button>
-    <p class="my-3">Don't have an account? <a routerLink="/register">Register now</a></p>
+    <p class="my-3">Don't have an account?
+      <a routerLink="/register">Register now</a>
+    </p>
   </form>
 </div>

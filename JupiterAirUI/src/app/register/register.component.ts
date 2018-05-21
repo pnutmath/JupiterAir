@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../services/authentication.service';
-import { User } from '../models/User';
+import { AuthenticationService, TokenPayload } from '../services/authentication.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -9,17 +8,22 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  credentials: TokenPayload = {
+    name: '',
+    username: '',
+    password: '',
+  };
   constructor(private _auth: AuthenticationService) { }
 
   ngOnInit() {
+    this._auth.routeUser();
   }
 
-  doRegister(loginform: NgForm): void {
-    const user: User = loginform.value;
-    this._auth.registerUser(user).subscribe((res) => {
-      console.log(res);
-      // TODO: let me check what to do
+  doRegister() {
+    this._auth.registerUser(this.credentials).subscribe((res) => {
+      this._auth.routeUser();
+    }, err => {
+      console.error(err);
     });
 
   }
