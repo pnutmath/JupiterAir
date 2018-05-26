@@ -19,15 +19,42 @@ module.exports.addAirlineDetails = (req, res) => {
     console.log(airline);
 }
 module.exports.updateAirlineDetails = (req, res) => {
+    Airline.findByIdAndUpdate(
+        { _id: req.params.id },
+        {
+            $set: {
+                name: req.body.name,
+                slogan: req.body.slogan,
+                founded_on: req.body.founded_on,
+                origin_contry: req.body.origin_contry,
+                hubs: req.body.hubs,
+                focus_cities: req.body.focus_cities,
+                best_travel_reward: req.body.best_travel_reward
+            }
+        }, (err, item) => {
+            if (err) {
+                res.json({ mag: "Unable to update item", err: err });
+            } else {
+                res.json({ msg: 'Item updated successfully' });
+            }
+        });
 
 }
 module.exports.deleteAirlineDetails = (req, res) => {
-
+    Airline.remove(
+        { _id: req.params.id }, (err, item) => {
+            if (err) {
+                res.json({ mag: "Unable to delete item", err: err });
+            } else {
+                res.json({ msg: 'Item delete successfully' });
+            }
+        });
 }
 module.exports.getAirlinesDetails = (req, res) => {
-    console.log('ht');
-    res.status(200);
-    res.json(Airline.find({}));
+
+    Airline.find((err, items) => {
+        err ? res.json(err) : res.json(items);
+    });
 }
 module.exports.getAirlineDetails = (req, res) => {
 }

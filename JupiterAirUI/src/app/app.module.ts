@@ -11,13 +11,15 @@ import { AuthenticationService } from './services/authentication.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
       AppRoutes, { enableTracing: false }
     ),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]

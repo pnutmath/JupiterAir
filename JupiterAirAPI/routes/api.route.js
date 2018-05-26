@@ -25,13 +25,13 @@ router.get('/admin', auth, function (req, res) {
 // retrive the airlines
 router.get('/airlines', airline_controller.getAirlinesDetails)
 // retrive the airline
-router.get('/airline:id', airline_controller.getAirlineDetails)
+router.get('/airline/:id', airline_controller.getAirlineDetails)
 // add the airlines
 router.post('/airline', airline_controller.addAirlineDetails)
 // update the airlines
-router.put('/airline:id', airline_controller.updateAirlineDetails)
+router.put('/airline/:id', airline_controller.updateAirlineDetails)
 // delete the airlines
-router.delete('/airline', airline_controller.deleteAirlineDetails)
+router.delete('/airline/:id', airline_controller.deleteAirlineDetails)
 
 // authentication
 router.post('/register', ctrlAuth.register);

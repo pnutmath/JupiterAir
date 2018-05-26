@@ -1,54 +1,81 @@
 <div class="row">
   <div class="col-md-4">
     <h3>Airline Add/Edit</h3>
-    {{airlineForm.value|json}}
     <form #airlineForm="ngForm" (ngSubmit)="processAirlineDetails(airlineForm.value)">
-      <div class="form-group">
-        <label for="name">Name: </label>
-        <input class="form-control" type="text" id="name" name="name" [(ngModel)]="name" required/>
+      <input type="hidden" name="_id" [(ngModel)]="airline._id">
+      <div class="form-group row">
+        <label for="name" class="col-md-3">Name: </label>
+        <input class="form-control col-md-9" type="text" id="name" name="name" [(ngModel)]="airline.name" required/>
       </div>
-      <div class="form-group">
-        <label for="slogan">Slogan: </label>
-        <input class="form-control" type="text" id="slogan" name="slogan" [(ngModel)]="slogan" required/>
+      <div class="form-group row">
+        <label for="slogan" class="col-md-3">Slogan: </label>
+        <input class="form-control col-md-9" type="text" id="slogan" name="slogan" [(ngModel)]="airline.slogan" required/>
       </div>
-      <div class="form-group">
-        <label for="founded_on">Founded On: </label>
-        <input class="form-control" type="number" pattern="[0-9]{4}" id="founded_on" name="founded_on" [(ngModel)]="founded_on" required/>
-      </div>
-      <div class="form-group">
-        <label for="origin_contry">Contry: </label>
-        <input class="form-control" type="text" id="origin_contry" name="origin_contry" [(ngModel)]="origin_contry" required/>
-      </div>
-      <div class="form-group">
-        <label for="hubs">Hubs: </label>
-        <input class="form-control" type="text" id="hubs" name="hubs" [(ngModel)]="hubs" required/>
-      </div>
-      <div class="form-group">
-        <label for="focus_cities">Cities covered: </label>
-        <input class="form-control" type="text" id="focus_cities" name="focus_cities" [(ngModel)]="focus_cities" required/>
-      </div>
-      <div class="form-group">
-        <label for="best_travel_reward">Best Travel Rewards: </label>
-        <input class="form-control" type="text" id="best_travel_reward" name="best_travel_reward" [(ngModel)]="best_travel_reward"
+      <div class="form-group row">
+        <label for="founded_on" class="col-md-3">Founded On: </label>
+        <input class="form-control col-md-9" type="number" pattern="[0-9]{4}" id="founded_on" name="founded_on" [(ngModel)]="airline.founded_on"
           required/>
       </div>
+      <div class="form-group row">
+        <label for="origin_contry" class="col-md-3">Country: </label>
+        <input class="form-control col-md-9" type="text" id="origin_contry" name="origin_contry" [(ngModel)]="airline.origin_contry"
+          required/>
+      </div>
+      <div class="form-group row">
+        <label for="hubs" class="col-md-3">Hubs: </label>
+        <input class="form-control col-md-9" type="text" id="hubs" name="hubs" [(ngModel)]="airline.hubs" required/>
+      </div>
+      <div class="form-group row">
+        <label for="focus_cities" class="col-md-3">Cities covered: </label>
+        <input class="form-control col-md-9" type="text" id="focus_cities" name="focus_cities" [(ngModel)]="airline.focus_cities"
+          required/>
+      </div>
+      <div class="form-group row">
+        <label for="best_travel_reward" class="col-md-3">Best Travel Rewards: </label>
+        <input class="form-control col-md-9" type="text" id="best_travel_reward" name="best_travel_reward" [(ngModel)]="airline.best_travel_reward"
+          required/>
+      </div>
+      <div class="form-group row">
+        <label for="airlinePic" class="col-md-3">Display Picture: </label>
+        <input class="form-control col-md-9" type="file" (change)="selectDPImage($event)" id="airlinePic" name="airlinePic" [(ngModel)]="airline.airlinePic"
+          required/>
+      </div>
+      <ngb-progressbar showValue="true" type="success" [value]="fileProgress"></ngb-progressbar>
+      <hr/>
       <button type="submit" class="btn btn-success">Save/Edit</button>
+      <button type="reset" (click)="formReset()" class="btn btn-primary">Reset</button>
     </form>
   </div>
   <div class="col-md-8">
+    <h2>List of airlines:</h2>
     <ul class="list-group">
-      {{airlineList}}
+      <!-- {{airlineList|json}} -->
       <li *ngIf="airlineList.length==0">No Airline details avaialble, please add details from left side form!</li>
       <li *ngFor="let item of airlineList" class="list-group-item">
-        <a href="{{item.name}}">{{item.name}}</a> , {{item.qty}} units available | {{item.price|currency:"Rs."}}
+        <a href="{{item.name}}">{{item.name}}</a> , {{item.slogan}}
         <span class="float-right">
           <button type="button" class="btn btn-info" (click)="fillItemForm(item)">
             <i class="action-undo"></i>Edit
           </button>
-          <button type="button" class="btn btn-danger" (click)="deleteConfirmation(deleteModalcontent, item._id)">
+          <button type="button" class="btn btn-danger" (click)="deleteConfirmation(deleteModalcontent, item)">
             Delete</button>
         </span>
       </li>
     </ul>
   </div>
 </div>
+<ng-template #deleteModalcontent let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Are you sure want to delete this item?</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>You may loss all data related to this item&hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
+    <button type="button" class="btn btn-dark" (click)="c('delete')">Yes, delete!</button>
+  </div>
+</ng-template>

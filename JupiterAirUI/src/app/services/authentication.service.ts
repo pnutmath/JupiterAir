@@ -29,7 +29,6 @@ export interface TokenPayload {
 export class AuthenticationService {
 
   private token: string;
-
   constructor(private httpClient: HttpClient, private router: Router) { }
   verifyUser(userdata: TokenPayload): Observable<any> {
     return this.httpClient.post('http://localhost:3000/api/login', userdata).pipe(map((data: TokenResponse) => {

@@ -13,7 +13,7 @@ export class Airline {
     founded_on: Number;
     hubs: [String];
     focus_cities: [String];
-    destinations: Number;
+    airlinePic: File;
     origin_contry: String;
     best_travel_reward: String;
 }
