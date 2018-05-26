@@ -1,7 +1,7 @@
 <div class="text-center">
   <form #loginform="ngForm" (submit)="doLogin();" class="form-signin">
     <div *ngIf="!isValidUser && loginform.submitted" class="alert alert-danger" role="alert">
-      Username / password is invalid!
+      {{errorMessage}}
     </div>
     <img class="mb-4" src="../assets/images/ng-logo-cool.svg" alt="" width="72" height="72">
 

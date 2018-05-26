@@ -22,11 +22,16 @@ let airline_controller = require('../controllers/airline');
 router.get('/admin', auth, function (req, res) {
   res.send('Airlines home page')
 })
-// define the airline route
-router.get('/airline', function (req, res) {
-  console.log(req.body);
-  res.send('About airlines')
-})
+// retrive the airlines
+router.get('/airlines', airline_controller.getAirlinesDetails)
+// retrive the airline
+router.get('/airline:id', airline_controller.getAirlineDetails)
+// add the airlines
+router.post('/airline', airline_controller.addAirlineDetails)
+// update the airlines
+router.put('/airline:id', airline_controller.updateAirlineDetails)
+// delete the airlines
+router.delete('/airline', airline_controller.deleteAirlineDetails)
 
 // authentication
 router.post('/register', ctrlAuth.register);

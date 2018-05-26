@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   isValidUser = true;
+  errorMessage: string;
   credentials: TokenPayload = {
     username: '',
     password: ''
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this._auth.routeUser();
+    this.errorMessage = 'Username / password is invalid!';
   }
 
   doLogin() {
@@ -25,7 +27,7 @@ export class LoginComponent implements OnInit {
       this._auth.routeUser();
     }, err => {
       this.isValidUser = false;
-      console.error(err);
+      console.error(err.name);
     });
 
   }

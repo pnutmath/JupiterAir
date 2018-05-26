@@ -5,11 +5,11 @@
   <nav class="site-header sticky-top py-1">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
 
-      <a class="py-2 px-2 d-none d-md-inline-block" href="#">About</a>
+      <a *ngIf="auth.getUserDetails()?.username==='admin'" class="py-2 px-2 d-none d-md-inline-block" routerLink="admin">Admin Panel</a>
       <a class="py-2 px-2 d-none d-md-inline-block" href="#">Product</a>
     </div>
   </nav>
-  <span *ngIf="auth.isLoggedIn()">Welcome {{auth.getUserDetails().username}}</span>  
+  <span *ngIf="auth.isLoggedIn()">Welcome {{auth.getUserDetails()?.username}}</span>  
   <a *ngIf="!auth.isLoggedIn()" routerLink="login" class="btn btn-outline-primary">login</a>
   <a *ngIf="auth.isLoggedIn()" (click)="auth.logout()" class="btn btn-outline-primary ml-3">logout</a>
 </div>

@@ -14,7 +14,7 @@ let airlineSchema = mongoose.Schema({
         comment: String
     }],
     founded_on: Number,
-    hubs: String,
+    hubs: [String],
     focus_cities: [String],
     destinations: Number,
     origin_contry: String,

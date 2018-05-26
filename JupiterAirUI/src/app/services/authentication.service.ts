@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/User';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -88,7 +87,9 @@ export class AuthenticationService {
   }
 
   routeUser() {
-    if (this.getUserDetails().username === 'admin') {
+    const userDetails = this.getUserDetails();
+    if (!userDetails) { return; }
+    if (userDetails.username === 'admin') {
       this.router.navigateByUrl('/admin');
     } else {
       this.router.navigateByUrl('/');

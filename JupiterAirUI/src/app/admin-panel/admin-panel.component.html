@@ -1,3 +1,54 @@
-<p>
-  admin-panel works!
-</p>
+<div class="row">
+  <div class="col-md-4">
+    <h3>Airline Add/Edit</h3>
+    {{airlineForm.value|json}}
+    <form #airlineForm="ngForm" (ngSubmit)="processAirlineDetails(airlineForm.value)">
+      <div class="form-group">
+        <label for="name">Name: </label>
+        <input class="form-control" type="text" id="name" name="name" [(ngModel)]="name" required/>
+      </div>
+      <div class="form-group">
+        <label for="slogan">Slogan: </label>
+        <input class="form-control" type="text" id="slogan" name="slogan" [(ngModel)]="slogan" required/>
+      </div>
+      <div class="form-group">
+        <label for="founded_on">Founded On: </label>
+        <input class="form-control" type="number" pattern="[0-9]{4}" id="founded_on" name="founded_on" [(ngModel)]="founded_on" required/>
+      </div>
+      <div class="form-group">
+        <label for="origin_contry">Contry: </label>
+        <input class="form-control" type="text" id="origin_contry" name="origin_contry" [(ngModel)]="origin_contry" required/>
+      </div>
+      <div class="form-group">
+        <label for="hubs">Hubs: </label>
+        <input class="form-control" type="text" id="hubs" name="hubs" [(ngModel)]="hubs" required/>
+      </div>
+      <div class="form-group">
+        <label for="focus_cities">Cities covered: </label>
+        <input class="form-control" type="text" id="focus_cities" name="focus_cities" [(ngModel)]="focus_cities" required/>
+      </div>
+      <div class="form-group">
+        <label for="best_travel_reward">Best Travel Rewards: </label>
+        <input class="form-control" type="text" id="best_travel_reward" name="best_travel_reward" [(ngModel)]="best_travel_reward"
+          required/>
+      </div>
+      <button type="submit" class="btn btn-success">Save/Edit</button>
+    </form>
+  </div>
+  <div class="col-md-8">
+    <ul class="list-group">
+      {{airlineList}}
+      <li *ngIf="airlineList.length==0">No Airline details avaialble, please add details from left side form!</li>
+      <li *ngFor="let item of airlineList" class="list-group-item">
+        <a href="{{item.name}}">{{item.name}}</a> , {{item.qty}} units available | {{item.price|currency:"Rs."}}
+        <span class="float-right">
+          <button type="button" class="btn btn-info" (click)="fillItemForm(item)">
+            <i class="action-undo"></i>Edit
+          </button>
+          <button type="button" class="btn btn-danger" (click)="deleteConfirmation(deleteModalcontent, item._id)">
+            Delete</button>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
