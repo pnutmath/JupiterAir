@@ -18,20 +18,19 @@ router.use(function timeLog(req, res, next) {
 let ctrlAuth = require('../controllers/authentication');
 let airline_controller = require('../controllers/airline');
 
-// define the home page route
-router.get('/admin', auth, function (req, res) {
-  res.send('Airlines home page')
-})
 // retrive the airlines
 router.get('/airlines', airline_controller.getAirlinesDetails)
 // retrive the airline
 router.get('/airline/:id', airline_controller.getAirlineDetails)
 // add the airlines
-router.post('/airline', airline_controller.addAirlineDetails)
+router.post('/airline', auth, airline_controller.addAirlineDetails)
 // update the airlines
-router.put('/airline/:id', airline_controller.updateAirlineDetails)
+router.put('/airline/:id', auth, airline_controller.updateAirlineDetails)
 // delete the airlines
-router.delete('/airline/:id', airline_controller.deleteAirlineDetails)
+router.delete('/airline/:id', auth, airline_controller.deleteAirlineDetails)
+
+// add review
+router.post('/airline/:id/review', auth, airline_controller.submitReview)
 
 // authentication
 router.post('/register', ctrlAuth.register);

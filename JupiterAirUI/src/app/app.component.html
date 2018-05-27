@@ -9,7 +9,7 @@
       <a class="py-2 px-2 d-none d-md-inline-block" href="#">Product</a>
     </div>
   </nav>
-  <span *ngIf="auth.isLoggedIn()">Welcome {{auth.getUserDetails()?.username}}</span>  
+  <span *ngIf="auth.isLoggedIn()">Welcome {{auth.getUserDetails()?.name}}</span>  
   <a *ngIf="!auth.isLoggedIn()" routerLink="login" class="btn btn-outline-primary">login</a>
   <a *ngIf="auth.isLoggedIn()" (click)="auth.logout()" class="btn btn-outline-primary ml-3">logout</a>
 </div>

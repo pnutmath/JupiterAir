@@ -38,7 +38,7 @@ app.use(function (err, req, res, next) {
     }
 });
 
-app.get('/', (req, res) => res.send('Dont try to play with our API'));
+app.use('/', express.static('public'));
 
 app.listen(PORT
     , () => console.log(`app listening on port ${PORT}!`));

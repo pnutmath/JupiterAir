@@ -1,3 +1,5 @@
+<div class="alert alert-danger alert-dismissible" *ngIf="isWarning">
+  {{warningMessage}}</div>
 <section class="row">
   <div *ngFor="let airline of airlineList" class="col-md-4 col-sm-6">
     <div class="card mb-4 box-shadow">
@@ -11,9 +13,10 @@
         <div class="d-flex justify-content-between align-items-center">
           <div class="btn-group">
             <button type="button" class="btn btn-sm btn-outline-secondary" (click)="viewAirlineDetails(viewAirlineTemplate,airline)">View</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Comment</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="addReview(addReviewTemplate,airline)">Add Review</button>
           </div>
-          <small class="text-muted">9 mins</small>
+          <span class="badge badge-success">{{getAverageRating(airline.rating)}} star</span>
+          <small class="text-muted">{{airline.comments.length}} Comments</small>
         </div>
       </div>
     </div>
@@ -34,9 +37,49 @@
       <br/> Hubs : {{airlineSingle.hubs}}
       <br/> Rewards received: {{airlineSingle.best_travel_reward}}
     </p>
+    <h5>Comments:</h5>
+    <ul>
+      <li *ngFor="let comment of airlineSingle.comments">{{comment.comment}}</li>
+    </ul>
+    <span class="alert alert-info" *ngIf="!airlineSingle.comments.length">Be the first reviewer!</span>
   </div>
   <div class="modal-footer">
     <!-- <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cancel</button> -->
     <button type="button" class="btn btn-dark" (click)="c('close')">Close</button>
+  </div>
+</ng-template>
+
+
+<ng-template #addReviewTemplate let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{airlineSingle.name}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #reviewform>
+      <div id="star_review">
+        <input type="radio" name="rating" value="1" />1,
+        <input type="radio" name="rating" value="2" />2,
+        <input type="radio" name="rating" value="3" />3,
+        <input type="radio" name="rating" value="4" />4,
+        <input type="radio" name="rating" value="5" checked/>5
+        <i class="material-icons" (mouseenter)="mouseStarEnter(1)">star</i>
+        <i class="material-icons" (mouseenter)="mouseStarEnter(2)">star</i>
+        <i class="material-icons" (mouseenter)="mouseStarEnter(3)">star</i>
+        <i class="material-icons" (mouseenter)="mouseStarEnter(4)">star</i>
+        <i class="material-icons" (mouseenter)="mouseStarEnter(5)">star</i>
+      </div>
+      <div class="form-group">
+        <label for="comment">Comment:</label>
+        <textarea class="form-control" id="comment" name="comment" [(ngModel)]="comment"></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit" (click)="c(reviewform)">Submit</button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cancel</button> -->
+    <!-- <button type="button" class="btn btn-dark" (click)="c('close')">Close</button> -->
   </div>
 </ng-template>

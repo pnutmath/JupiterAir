@@ -4,3 +4,6 @@
 
 #config
 /config/default.json
+
+#angular UI
+/public
