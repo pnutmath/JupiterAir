@@ -14,7 +14,8 @@ const apiRoutes = require('./routes/api.route');
 
 const app = express();
 const router = express.Router()
-const PORT = 3000;
+
+const PORT = process.env.PORT || 3000;
 
 //connect to mongo db
 mongoose.connect(config.get('mongodbpath'));
