@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
 
   viewAirlineDetails(content, airline: Airline) {
     this.airlineSingle = airline;
+    this.airlineSingle.comments = <any>this.airlineSingle.comments.filter(com => com.comment !== '');
     this.modalService.open(content).result.then((result) => {
       // console.log(`Closed with: ${result}`);
       if (result === 'delete') {

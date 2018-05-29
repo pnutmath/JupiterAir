@@ -6,7 +6,6 @@
     <div class="container d-flex flex-column flex-md-row justify-content-between">
 
       <a *ngIf="auth.getUserDetails()?.username==='admin'" class="py-2 px-2 d-none d-md-inline-block" routerLink="admin">Admin Panel</a>
-      <a class="py-2 px-2 d-none d-md-inline-block" href="#">Product</a>
     </div>
   </nav>
   <span *ngIf="auth.isLoggedIn()">Welcome {{auth.getUserDetails()?.name}}</span>  

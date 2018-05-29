@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Config } from '../config/config';
 
 
 export interface UserDetails {
@@ -31,7 +32,7 @@ export class AuthenticationService {
   private token: string;
   constructor(private httpClient: HttpClient, private router: Router) { }
   verifyUser(userdata: TokenPayload): Observable<any> {
-    return this.httpClient.post('http://localhost:3000/api/login', userdata).pipe(map((data: TokenResponse) => {
+    return this.httpClient.post(`${Config.API_URL}login`, userdata).pipe(map((data: TokenResponse) => {
       if (data.token) {
         this.saveToken(data.token);
       }
@@ -39,7 +40,7 @@ export class AuthenticationService {
     );
   }
   registerUser(userdata: TokenPayload) {
-    return this.httpClient.post('http://localhost:3000/api/register', userdata).pipe(map((data: TokenResponse) => {
+    return this.httpClient.post(`${Config.API_URL}register`, userdata).pipe(map((data: TokenResponse) => {
       if (data.token) {
         this.saveToken(data.token);
       }

@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+let config = require('config');
 
 const path = require('path');
 // const favicon = require('serve-favicon');
@@ -16,7 +17,7 @@ const router = express.Router()
 const PORT = 3000;
 
 //connect to mongo db
-mongoose.connect('mongodb://localhost:27017/jupiterair');
+mongoose.connect(config.get('mongodbpath'));
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
@@ -39,6 +40,9 @@ app.use(function (err, req, res, next) {
 });
 
 app.use('/', express.static('public'));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 app.listen(PORT
     , () => console.log(`app listening on port ${PORT}!`));
